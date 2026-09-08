@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Groundtruth — is it a problem here?</title>
+<meta name="description" content="Photograph a plant, insect or animal and find out whether it is a problem where you are standing.">
+<meta name="theme-color" content="#f5ead8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: {
+    paper:'#f5ead8', surface:'#ebddc5', ink:'#201e1d',
+    clay:{DEFAULT:'#c67139',100:'#fff2eb',200:'#ffe1d0',600:'#b2622d',700:'#8c491a'},
+    sage:{DEFAULT:'#7a8a5e',100:'#f0fae1',700:'#56633f'},
+    mute:{300:'#dcd3c4',500:'#a19786',600:'#82796a',700:'#645c50',800:'#474238'},
+    invasive:  {DEFAULT:'#a32a1e', ink:'#7c1f16', tint:'#f6ded8', line:'#e8bcb2'},
+    introduced:{DEFAULT:'#b0770b', ink:'#8a5a00', tint:'#fbebc8', line:'#edd69b'},
+    native:    {DEFAULT:'#5b7c3a', ink:'#445c2a', tint:'#e5efd4', line:'#c4d8a8'},
+    unknown:   {DEFAULT:'#6b6b74', ink:'#4f4f57', tint:'#e9e5df', line:'#cfc9c1'}
+  },
+  fontFamily:{ display:['Caprasimo','serif'], sans:['Figtree','system-ui','sans-serif'] },
+  borderRadius:{ 'gt-sm':'8px', gt:'16px', 'gt-lg':'28px' },
+  spacing:{ 'gt-1':'4px','gt-2':'9px','gt-3':'13px','gt-4':'18px','gt-6':'26px','gt-8':'35px' },
+  boxShadow:{
+    'gt-sm':'0 1px 2px rgba(46,43,37,.14)',
+    'gt-md':'0 3px 10px rgba(46,43,37,.16)',
+    'gt-lg':'0 12px 32px rgba(46,43,37,.22)'
+  }
+}}};
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="min-h-full bg-paper text-ink font-sans antialiased flex flex-col">
+
+<!-- Header -->
+<header class="flex-none">
+  <div class="mx-auto w-full max-w-[430px] md:max-w-[1040px] px-5 h-14 md:h-[72px] flex items-center justify-between gap-4">
+    <a href="index.html" class="font-display text-[21px] md:text-[24px] tracking-[-0.01em] text-ink">Groundtruth</a>
+
+    <!-- Desktop nav. On mobile this job belongs to the bottom bar. -->
+    <nav class="hidden md:flex items-center gap-1 ml-4 mr-auto" aria-label="Main">
+      <a href="index.html" aria-current="page" class="px-4 py-2 rounded-full bg-clay-200 text-clay-700 text-[14px] font-bold">Identify</a>
+      <a href="map.html" class="px-4 py-2 rounded-full text-mute-700 text-[14px] font-semibold hover:bg-surface">Map</a>
+    </nav>
+
+    <button id="locChip" type="button"
+      class="inline-flex items-center gap-1.5 bg-surface rounded-full pl-2.5 pr-3 py-1.5 text-[12px] font-bold text-mute-700 min-h-[34px]">
+      <span class="ico i-locate-off w-[13px] h-[13px]" id="locChipIcon" aria-hidden="true"></span>
+      <span id="locChipText">No location</span>
+    </button>
+  </div>
+</header>
+
+<main class="flex-1 pb-[104px] md:pb-10">
+  <div class="mx-auto w-full max-w-[430px] md:max-w-[1040px] px-5">
+    <div class="md:grid md:grid-cols-[620px_380px] md:gap-10 md:items-start">
+
+      <div class="min-w-0">
+
+        <!-- View: upload -->
+        <section id="viewUpload" class="pt-2">
+          <h1 class="font-display text-[30px] md:text-[38px] leading-[1.1] tracking-[-0.015em] mt-2 mb-2.5">What did you find?</h1>
+          <p class="text-[15px] leading-[1.55] text-mute-800 mb-[22px]">
+            Take a photo. We will tell you what it is, and whether it is a problem where you are standing.
+          </p>
+
+          <!-- Rejections stay inline on the screen you were already on, and stay
+               grey: red belongs to invasive species, not to a bad file picker. -->
+          <div id="uploadError" class="gt-hidden mb-5 rounded-gt-lg bg-surface border border-mute-300 p-4">
+            <div class="flex items-start gap-3">
+              <span class="ico i-alert w-5 h-5 text-mute-700 mt-0.5 flex-none" aria-hidden="true"></span>
+              <div class="min-w-0">
+                <div class="font-display text-[17px] leading-tight" id="uploadErrorTitle"></div>
+                <p class="text-[13.5px] leading-[1.5] text-mute-800 mt-1.5" id="uploadErrorBody"></p>
+                <p class="text-[12.5px] leading-[1.5] text-mute-700 mt-2" id="uploadErrorHint"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- One target, one question. The library option is a link inside the
+               target rather than a second button competing with it. -->
+          <button type="button" id="shutter"
+            class="w-full h-[226px] md:h-[260px] rounded-gt-lg border-2 border-dashed border-[#e0a878] bg-clay-100 flex flex-col items-center justify-center gap-[13px]">
+            <span class="w-[74px] h-[74px] rounded-full bg-clay flex items-center justify-center shadow-gt-md">
+              <span class="ico i-camera w-[33px] h-[33px] text-paper" aria-hidden="true"></span>
+            </span>
+            <span class="font-display text-[19px] text-ink" id="shutterLabel">Take a photo</span>
+            <span class="text-[13px] text-clay-700 font-bold" id="shutterSub">or choose one from your library</span>
+          </button>
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" class="sr-only">
+
+          <!-- Coordinates are shown, not hidden. People are about to publish a
+               point on a public map, so they get to see it first. -->
+          <div id="photoCard" class="gt-hidden mt-5 rounded-gt-lg bg-surface p-4">
+            <div class="flex items-center gap-3.5">
+              <img id="photoThumb" alt="" class="w-[62px] h-[62px] rounded-[18px] object-cover flex-none bg-mute-300">
+              <div class="min-w-0 flex-1">
+                <div class="text-[14px] font-bold truncate" id="photoName"></div>
+                <div class="text-[12.5px] text-mute-700" id="photoSize"></div>
+              </div>
+              <button type="button" id="photoChange" class="h-8 px-3.5 rounded-full border border-ink/20 font-display text-[13px]">Change</button>
+            </div>
+            <div class="mt-3 pt-3 border-t border-ink/10 flex items-start gap-2.5 text-[12.5px] text-mute-700">
+              <span class="ico i-crosshair w-4 h-4 text-clay-600 mt-px flex-none" aria-hidden="true"></span>
+              <span id="photoCoords">No location — the check will cover the whole United States</span>
+            </div>
+            <button type="button" id="identifyBtn"
+              class="mt-4 w-full h-[54px] rounded-full bg-clay text-paper font-display text-[17px] shadow-gt-md flex items-center justify-center gap-2.5">
+              <span class="ico i-sprout w-5 h-5" aria-hidden="true"></span>Identify this
+            </button>
+          </div>
+
+          <!-- Location is a row, not a permission wall. -->
+          <div id="locRow" class="mt-[22px] rounded-[20px] bg-surface px-4 py-[15px]">
+            <div class="flex items-center gap-3">
+              <span class="ico i-crosshair w-5 h-5 text-clay-600" id="locRowIcon" aria-hidden="true"></span>
+              <div class="flex-1 min-w-0">
+                <div class="text-[13.5px] font-bold">Use my location</div>
+                <div class="text-[12px] text-mute-700" id="locRowSub">Makes the verdict specific to where you are standing</div>
+              </div>
+              <button type="button" id="locToggle" role="switch" aria-checked="false" aria-label="Use my location"
+                class="w-[46px] h-[27px] rounded-full bg-mute-500 relative flex-none transition-colors">
+                <span id="locKnob" class="absolute top-[3px] left-[3px] w-[21px] h-[21px] rounded-full bg-[#f9f4ed] transition-transform"></span>
+              </button>
+            </div>
+            <!-- Not an error, and nothing is blocked. Names the two things that
+                 actually change. -->
+            <div id="locDenied" class="gt-hidden mt-3 pt-3 border-t border-ink/10">
+              <p class="text-[12.5px] leading-[1.55] text-mute-800">
+                Identification still works. We will just check against the whole United States instead of your state.
+              </p>
+              <ul class="mt-2 space-y-1.5 text-[12.5px] text-mute-700">
+                <li class="flex gap-2"><span class="ico i-x w-3.5 h-3.5 mt-0.5 flex-none" aria-hidden="true"></span>The verdict will not be specific to where you are standing</li>
+                <li class="flex gap-2"><span class="ico i-x w-3.5 h-3.5 mt-0.5 flex-none" aria-hidden="true"></span>You cannot log a sighting, because the map needs coordinates</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="mt-4 text-[12.5px] text-mute-700 leading-[1.6] flex gap-2 items-start">
+            <span class="ico i-info w-[15px] h-[15px] mt-0.5 flex-none" aria-hidden="true"></span>
+            <span>JPEG, PNG or WebP, up to 10&nbsp;MB. Most answers take 5 to 15 seconds.</span>
+          </p>
+        </section>
+
+        <!-- View: the wait. Three named steps, in the order the backend runs them. -->
+        <section id="viewLoading" class="gt-hidden pt-6" aria-live="polite">
+          <h1 class="font-display text-[30px] leading-[1.1] tracking-[-0.015em] mb-2" id="waitTitle">Working on it</h1>
+          <p class="text-[13.5px] text-mute-700 mb-6" id="waitSub">Most answers take 5 to 15 seconds.</p>
+
+          <!-- Appears at ten seconds, not at zero. Before then the wait is
+               normal and saying so would invent a problem. -->
+          <div id="coldStart" class="gt-hidden mb-6 rounded-gt bg-clay-100 border border-clay-200 p-4 gt-enter">
+            <p class="text-[13px] leading-[1.55] text-mute-800">
+              <strong class="font-bold text-ink">First check of the day.</strong>
+              Our server sleeps when nobody is using it, so this one can take up to a minute. Every check after it is fast.
+            </p>
+          </div>
+
+          <ol class="space-y-3" id="waitSteps">
+            <li class="flex gap-3.5 items-start" data-step="0">
+              <span class="w-[26px] h-[26px] rounded-full flex-none flex items-center justify-center text-[12px] font-bold bg-mute-300 text-mute-700" data-dot>1</span>
+              <div class="min-w-0 flex-1">
+                <div class="text-[14.5px] font-bold leading-tight">Looking at the photo</div>
+                <div class="text-[12.5px] text-mute-700 mt-0.5" data-detail>&nbsp;</div>
+              </div>
+            </li>
+            <li class="flex gap-3.5 items-start" data-step="1">
+              <span class="w-[26px] h-[26px] rounded-full flex-none flex items-center justify-center text-[12px] font-bold bg-mute-300 text-mute-700" data-dot>2</span>
+              <div class="min-w-0 flex-1">
+                <div class="text-[14.5px] font-bold leading-tight">Checking where you are</div>
+                <div class="text-[12.5px] text-mute-700 mt-0.5" data-detail>&nbsp;</div>
+              </div>
+            </li>
+            <li class="flex gap-3.5 items-start" data-step="2">
+              <span class="w-[26px] h-[26px] rounded-full flex-none flex items-center justify-center text-[12px] font-bold bg-mute-300 text-mute-700" data-dot>3</span>
+              <div class="min-w-0 flex-1">
+                <div class="text-[14.5px] font-bold leading-tight">Working out what it means here</div>
+                <div class="text-[12.5px] text-mute-700 mt-0.5" data-detail>&nbsp;</div>
+              </div>
+            </li>
+          </ol>
+
+          <div class="mt-7 flex items-center gap-3">
+            <div class="relative flex-1 h-[6px] rounded-full bg-mute-300 overflow-hidden gt-sweep"></div>
+            <span class="text-[12.5px] font-semibold text-mute-700 tabular-nums" id="waitElapsed">0s</span>
+          </div>
+        </section>
+
+        <!-- View: result -->
+        <section id="viewResult" class="gt-hidden"></section>
+
+        <!-- View: failures -->
+        <section id="viewFail" class="gt-hidden pt-6"></section>
+
+      </div>
+
+      <!-- Desktop rail: the map page's own endpoint, no new features. -->
+      <aside class="hidden md:block sticky top-6">
+        <div class="rounded-gt-lg bg-surface p-5">
+          <div class="flex items-baseline justify-between gap-3 mb-3">
+            <h2 class="font-display text-[19px]">Found near you lately</h2>
+            <a href="map.html" class="text-[13px] font-bold text-clay-700 hover:underline">Open the full map</a>
+          </div>
+          <ul id="railList" class="space-y-2.5">
+            <li class="text-[13px] text-mute-700">Loading recent sightings…</li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<!-- Bottom nav (mobile) -->
+<nav class="md:hidden fixed bottom-0 inset-x-0 h-[88px] bg-paper border-t border-ink/10 grid grid-cols-2 px-8 pt-2.5 gap-2.5 z-[1000]" aria-label="Main">
+  <a href="index.html" aria-current="page" class="flex flex-col items-center gap-1.5 pt-0.5">
+    <span class="w-[58px] h-[30px] rounded-full bg-clay-200 flex items-center justify-center">
+      <span class="ico i-camera w-5 h-5 text-clay-700" aria-hidden="true"></span>
+    </span>
+    <span class="text-[11.5px] font-bold text-clay-700">Identify</span>
+  </a>
+  <a href="map.html" class="flex flex-col items-center gap-1.5 pt-0.5">
+    <span class="w-[58px] h-[30px] flex items-center justify-center">
+      <span class="ico i-map-pin w-5 h-5 text-mute-700" aria-hidden="true"></span>
+    </span>
+    <span class="text-[11.5px] font-semibold text-mute-700">Map</span>
+  </a>
+</nav>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/identify.js"></script>
+</body>
+</html>

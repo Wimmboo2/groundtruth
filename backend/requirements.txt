@@ -1,0 +1,23 @@
+# Backend dependencies. Render installs these during its build step.
+#
+# Floor-pinned rather than exact-pinned: the dependency graph was not
+# resolved locally, so upper bounds are set only where a major version bump
+# would be breaking.
+
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+
+# Required for multipart form uploads (UploadFile). Without it, FastAPI
+# raises "Form data requires python-multipart to be installed" at runtime -
+# the single most common cause of a broken file-upload endpoint.
+python-multipart>=0.0.9
+
+# Async HTTP client for Pl@ntNet, Gemini and iNaturalist.
+httpx>=0.27,<1
+
+# Supabase over HTTPS/PostgREST, which avoids Render free tier's lack of
+# IPv6 outbound (Supabase's free-tier direct Postgres connection is
+# IPv6-only and would fail there).
+supabase>=2.20,<3
+
+pydantic>=2.7,<3

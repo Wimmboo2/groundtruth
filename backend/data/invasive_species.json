@@ -1,0 +1,541 @@
+{
+  "_comment": "Curated list of well-known invasive species in the United States. Public knowledge, hand-compiled. A match here is what upgrades a plain 'introduced' result to a confident 'Invasive' status, and seeds the Gemini explainer with vetted facts instead of improvised advice. 'aliases' carries taxonomic synonyms and alternate common names so matching survives whichever name Pl@ntNet, Gemini or iNaturalist happens to return.",
+  "species": [
+    {
+      "common_name": "Kudzu",
+      "scientific_name": "Pueraria montana",
+      "aliases": ["Pueraria lobata", "Pueraria montana var. lobata", "mile-a-minute vine", "foot-a-night vine"],
+      "category": "plant",
+      "why_it_matters": "Kudzu grows up to a foot per day and blankets everything beneath it, smothering native trees and shrubs by cutting off their sunlight. It has overrun millions of acres across the American Southeast and its deep root crowns make it extremely difficult to remove once established.",
+      "what_to_do": [
+        "Do not compost or transport any cut vines - fragments and root crowns readily resprout",
+        "Cut vines at the base repeatedly through the growing season to starve the root crown",
+        "For small patches, dig out the entire woody root crown just below the soil surface",
+        "Keep livestock grazing on it if available - sustained grazing weakens established stands",
+        "Report large infestations to your county extension office or state invasive species council"
+      ]
+    },
+    {
+      "common_name": "Japanese Knotweed",
+      "scientific_name": "Reynoutria japonica",
+      "aliases": ["Fallopia japonica", "Polygonum cuspidatum", "Japanese bamboo", "fleeceflower"],
+      "category": "plant",
+      "why_it_matters": "Japanese knotweed sends rhizomes several feet deep and many feet sideways, pushing through pavement, drainage systems and building foundations. A fragment the size of a fingernail can start an entirely new colony, so careless disposal actively spreads it.",
+      "what_to_do": [
+        "Never cut, mow, strim or dig it without a disposal plan - every fragment is a new plant",
+        "Do not put any part of it in yard waste or compost; bag it or follow local disposal rules",
+        "Clean boots, tools and equipment thoroughly before leaving the site",
+        "Treat with a targeted herbicide in late summer or early autumn when it moves resources to the roots",
+        "For infestations near foundations or drains, consult a professional - this one has real property consequences"
+      ]
+    },
+    {
+      "common_name": "Garlic Mustard",
+      "scientific_name": "Alliaria petiolata",
+      "aliases": ["hedge garlic", "jack-by-the-hedge", "poor man's mustard"],
+      "category": "plant",
+      "why_it_matters": "Garlic mustard releases chemicals that poison the soil fungi native woodland plants and tree seedlings depend on, so it hollows out forest understories rather than simply crowding them. A single plant can produce thousands of seeds that stay viable in the soil for years.",
+      "what_to_do": [
+        "Hand-pull before it sets seed, taking the whole root - it is easiest when soil is damp",
+        "Bag and dispose of pulled plants; do not compost, as cut plants can still ripen seed",
+        "Pull the same site annually for several years to exhaust the seed bank",
+        "Brush off boots and pet fur after walking through it to avoid carrying seed home",
+        "Target second-year plants with flower stalks first, since those are about to seed"
+      ]
+    },
+    {
+      "common_name": "Purple Loosestrife",
+      "scientific_name": "Lythrum salicaria",
+      "aliases": ["spiked loosestrife", "purple lythrum"],
+      "category": "plant",
+      "why_it_matters": "Purple loosestrife forms dense stands in wetlands that displace cattails and native marsh plants, degrading the food and nesting cover waterfowl and amphibians rely on. One mature plant can release over two million seeds in a season.",
+      "what_to_do": [
+        "Pull or dig young plants including the root before flowering, ideally in early summer",
+        "Cut and bag flower heads immediately if plants are already blooming, to stop seed release",
+        "Bag all material - do not compost, and avoid shaking plants near water",
+        "Never plant it ornamentally; several states prohibit its sale outright",
+        "Report wetland infestations to your state natural resources agency, where biological control programs may exist"
+      ]
+    },
+    {
+      "common_name": "Tree of Heaven",
+      "scientific_name": "Ailanthus altissima",
+      "aliases": ["ailanthus", "stinking sumac", "Chinese sumac", "paradise tree"],
+      "category": "plant",
+      "why_it_matters": "Tree of heaven grows fast, resprouts aggressively from roots, and releases chemicals that suppress nearby plants. It is also the preferred host of the spotted lanternfly, so removing it directly reduces habitat for a major agricultural pest.",
+      "what_to_do": [
+        "Do not simply cut it down - cutting alone triggers dense root suckering and makes the problem worse",
+        "Treat standing trees with a systemic herbicide (basal bark or hack-and-squirt) before any removal",
+        "Pull seedlings by hand while roots are still small",
+        "Check the area for spotted lanternfly egg masses, which are often laid on these trees",
+        "Follow up for two to three seasons, as root fragments continue to sprout"
+      ]
+    },
+    {
+      "common_name": "English Ivy",
+      "scientific_name": "Hedera helix",
+      "aliases": ["common ivy", "European ivy"],
+      "category": "plant",
+      "why_it_matters": "English ivy forms thick ground mats that block native seedlings, then climbs trees where its weight and sail area make them far more likely to topple in wind or ice storms. It also harbors bacterial leaf scorch, which affects native elms, oaks and maples.",
+      "what_to_do": [
+        "Cut a wide band of vines all the way around any tree trunk at chest and ankle height to kill the climbing portion",
+        "Leave the upper dead vines to fall naturally - pulling them down can strip bark",
+        "Pull ground ivy by hand, following runners back to their roots",
+        "Bag vines with berries; birds spread the seed widely",
+        "Replace cleared ground with native shade-tolerant cover so the ivy does not simply return"
+      ]
+    },
+    {
+      "common_name": "Chinese Privet",
+      "scientific_name": "Ligustrum sinense",
+      "aliases": ["Ligustrum japonicum", "hedge privet", "Chinese ligustrum"],
+      "category": "plant",
+      "why_it_matters": "Chinese privet forms near-impenetrable thickets in floodplains and forest edges, shading out native shrubs and preventing tree regeneration. Birds spread its abundant berries far beyond the hedgerows it escaped from.",
+      "what_to_do": [
+        "Pull or dig seedlings and small stems when soil is moist, removing the whole root",
+        "Cut larger stems and treat the stumps promptly, as cut privet resprouts vigorously",
+        "Remove berry-laden branches before fruit ripens to cut off bird dispersal",
+        "Do not plant it as hedging - choose a native shrub instead",
+        "Revisit cleared areas annually; the seed bank persists"
+      ]
+    },
+    {
+      "common_name": "Multiflora Rose",
+      "scientific_name": "Rosa multiflora",
+      "aliases": ["baby rose", "Japanese rose", "rambler rose"],
+      "category": "plant",
+      "why_it_matters": "Originally promoted for living fences and erosion control, multiflora rose now forms dense thorny thickets that take over pastures and forest edges. Its canes root where they touch the ground, and a single plant can produce hundreds of thousands of seeds that remain viable for years.",
+      "what_to_do": [
+        "Wear heavy gloves and eye protection - the thorns are serious",
+        "Dig or pull small plants, removing the root crown entirely",
+        "Repeatedly mow or cut larger stands during the growing season to deplete reserves",
+        "Cut and treat stumps of mature plants, which resprout readily",
+        "Monitor pastures annually, as birds continually reintroduce seed"
+      ]
+    },
+    {
+      "common_name": "Japanese Honeysuckle",
+      "scientific_name": "Lonicera japonica",
+      "aliases": ["Chinese honeysuckle", "gold-and-silver honeysuckle"],
+      "category": "plant",
+      "why_it_matters": "Japanese honeysuckle girdles young trees as it twines around them and blankets the forest floor, preventing native regeneration. It holds its leaves later than native plants, giving it a growing-season advantage that compounds each year.",
+      "what_to_do": [
+        "Pull young vines by hand, tracing runners back to the roots",
+        "Cut climbing vines at the base to free girdled saplings",
+        "Treat cut stems in late autumn, when native plants are dormant but honeysuckle is still active",
+        "Bag any fruiting material to limit bird-spread seed",
+        "Plant native vines such as coral honeysuckle as a replacement"
+      ]
+    },
+    {
+      "common_name": "Callery Pear",
+      "scientific_name": "Pyrus calleryana",
+      "aliases": ["Bradford pear", "Cleveland select", "ornamental pear"],
+      "category": "plant",
+      "why_it_matters": "Widely planted as a street tree, Callery pear escaped cultivation when different cultivars began cross-pollinating and producing fertile fruit. It now forms thorny thickets in old fields and roadsides, and several states have moved to ban its sale.",
+      "what_to_do": [
+        "Do not plant it - choose a native serviceberry, dogwood or redbud instead",
+        "Remove young volunteer trees before they fruit",
+        "Cut and treat stumps, since Callery pear resprouts and wild seedlings carry sharp thorns",
+        "Check whether your state offers a bounty or free-replacement-tree program - several do",
+        "Watch field edges and fencerows, where escaped seedlings usually appear first"
+      ]
+    },
+    {
+      "common_name": "Cogongrass",
+      "scientific_name": "Imperata cylindrica",
+      "aliases": ["japgrass", "blady grass", "speargrass"],
+      "category": "plant",
+      "why_it_matters": "Cogongrass forms dense mats of sharp-edged rhizomes that exclude nearly all other vegetation, and it burns hot enough to kill trees that would survive a normal fire. It is considered one of the worst weeds in the world and is a federal noxious weed in the United States.",
+      "what_to_do": [
+        "Do not mow through it and then drive elsewhere - equipment moves rhizome fragments efficiently",
+        "Report suspected infestations to your state forestry commission; this one warrants official attention",
+        "Clean all equipment, tires and boots thoroughly before leaving an infested site",
+        "Do not attempt casual removal - effective control needs repeated treatment over multiple seasons",
+        "Never use it as ornamental grass; some cultivars sold ornamentally can revert"
+      ]
+    },
+    {
+      "common_name": "Giant Hogweed",
+      "scientific_name": "Heracleum mantegazzianum",
+      "aliases": ["cartwheel-flower", "giant cow parsnip"],
+      "category": "plant",
+      "why_it_matters": "Giant hogweed sap causes severe burns and blistering when skin is exposed to sunlight afterward, and eye contact can cause lasting damage. It also crowds out streamside vegetation, leaving banks bare and prone to erosion. This is a genuine public health hazard, not just an ecological one.",
+      "what_to_do": [
+        "Do not touch it, cut it, or attempt removal yourself",
+        "If sap contacts skin, wash immediately with soap and water and keep the area out of sunlight for several days; seek medical advice for eye contact or blistering",
+        "Photograph it from a safe distance and report it to your state agriculture or environmental agency",
+        "Keep children and pets well clear of any stand",
+        "Leave removal to trained crews with proper protective equipment"
+      ]
+    },
+    {
+      "common_name": "Scotch Broom",
+      "scientific_name": "Cytisus scoparius",
+      "aliases": ["Sarothamnus scoparius", "English broom", "common broom"],
+      "category": "plant",
+      "why_it_matters": "Scotch broom forms dense stands that displace native prairie and open-forest plants, and it fixes nitrogen in a way that alters soil chemistry in favour of other weeds. Its seed pods fling seed several metres and remain viable in soil for decades.",
+      "what_to_do": [
+        "Pull young plants when soil is moist, taking the whole root",
+        "Cut mature plants at ground level during dry summer conditions, when regrowth is least likely",
+        "Remove plants before pods ripen and burst",
+        "Minimise soil disturbance, which encourages the seed bank to germinate",
+        "Replant cleared ground with natives to hold the site"
+      ]
+    },
+    {
+      "common_name": "Saltcedar",
+      "scientific_name": "Tamarix ramosissima",
+      "aliases": ["Tamarix chinensis", "tamarisk", "salt cedar"],
+      "category": "plant",
+      "why_it_matters": "Saltcedar draws enormous quantities of water from desert waterways and deposits salt on the soil surface, making conditions hostile to native cottonwoods and willows. It has transformed riparian corridors across the American Southwest.",
+      "what_to_do": [
+        "Remove seedlings and small plants by hand, taking the full root",
+        "Cut larger trees and treat stumps immediately - saltcedar resprouts strongly",
+        "Do not move cut material to uninfested drainages",
+        "Coordinate with local watershed or riparian restoration groups, as effective control is landscape-scale",
+        "Support native cottonwood and willow replanting after removal"
+      ]
+    },
+    {
+      "common_name": "Autumn Olive",
+      "scientific_name": "Elaeagnus umbellata",
+      "aliases": ["autumnberry", "Japanese silverberry", "Elaeagnus crispa"],
+      "category": "plant",
+      "why_it_matters": "Once planted widely for wildlife food and erosion control, autumn olive fixes nitrogen and enriches soils in ways that favour other invasive plants over natives adapted to poor ground. Birds spread its heavy fruit crops across open fields and forest edges.",
+      "what_to_do": [
+        "Pull seedlings and small shrubs, removing the root crown",
+        "Cut and treat stumps of established shrubs, which resprout prolifically after cutting alone",
+        "Remove plants before fruit ripens in autumn to limit bird dispersal",
+        "Avoid mowing alone, which tends to produce denser multi-stemmed regrowth",
+        "Monitor old fields and fencerows for new seedlings each year"
+      ]
+    },
+
+    {
+      "common_name": "Spotted Lanternfly",
+      "scientific_name": "Lycorma delicatula",
+      "aliases": ["SLF", "lanternfly"],
+      "category": "insect",
+      "why_it_matters": "Spotted lanternflies feed in huge numbers on grapevines, fruit trees and hardwoods, weakening plants and coating everything below in sticky honeydew that grows black sooty mould. They pose a serious threat to vineyards, orchards and the timber industry.",
+      "what_to_do": [
+        "Kill it if you can do so safely - this is one of the few species where squashing on sight is officially encouraged",
+        "Report the sighting to your state department of agriculture, especially outside known quarantine zones",
+        "Scrape egg masses (grey, mud-like patches) into a bag with rubbing alcohol or hand sanitiser between autumn and spring",
+        "Check vehicles, trailers, firewood and outdoor gear before travelling out of an infested area",
+        "Remove nearby tree of heaven, its preferred host plant"
+      ]
+    },
+    {
+      "common_name": "Emerald Ash Borer",
+      "scientific_name": "Agrilus planipennis",
+      "aliases": ["EAB", "ash borer"],
+      "category": "insect",
+      "why_it_matters": "Emerald ash borer larvae tunnel beneath ash bark and sever the tissue that moves water and nutrients, killing virtually every untreated ash tree they infest. It has already killed hundreds of millions of ash trees across North America.",
+      "what_to_do": [
+        "Do not move firewood - buy and burn it locally, as firewood transport is the main way this insect travels long distances",
+        "Report suspected infestations to your state agriculture or forestry agency",
+        "Look for D-shaped exit holes, S-shaped tunnels under bark, canopy dieback and unusual woodpecker activity",
+        "Consult an arborist about preventive treatment for high-value ash trees before symptoms appear",
+        "Plan removal of dead ash near buildings and roads - they become brittle and hazardous quickly"
+      ]
+    },
+    {
+      "common_name": "Asian Longhorned Beetle",
+      "scientific_name": "Anoplophora glabripennis",
+      "aliases": ["ALB", "starry sky beetle"],
+      "category": "insect",
+      "why_it_matters": "Asian longhorned beetle larvae bore deep into the heartwood of maples and other hardwoods, structurally weakening and eventually killing them. Because there is no effective treatment for infested trees, eradication programmes rely on removing them entirely.",
+      "what_to_do": [
+        "Report any sighting immediately to your state agriculture department or the USDA - this species is under active eradication",
+        "Capture the beetle in a jar and freeze it if you can do so safely, as confirmation matters",
+        "Look for perfectly round exit holes about the width of a pencil, and shallow oval egg sites in bark",
+        "Do not move firewood or woody debris out of the area",
+        "Photograph the insect and the tree damage before reporting"
+      ]
+    },
+    {
+      "common_name": "Brown Marmorated Stink Bug",
+      "scientific_name": "Halyomorpha halys",
+      "aliases": ["BMSB", "stink bug"],
+      "category": "insect",
+      "why_it_matters": "This stink bug damages a wide range of tree fruit, vegetables and row crops by feeding on them, leaving produce scarred and unmarketable. In autumn it gathers in large numbers inside houses to overwinter, making it a persistent nuisance as well as an agricultural pest.",
+      "what_to_do": [
+        "Seal cracks, window gaps and vents in late summer before they seek shelter indoors",
+        "Vacuum indoor bugs rather than crushing them, and empty the vacuum outside - crushing releases the odour",
+        "Use a bucket of soapy water to dispose of bugs collected outdoors",
+        "Remove window air conditioners in autumn, a common entry route",
+        "Report unusually large agricultural damage to your county extension office"
+      ]
+    },
+    {
+      "common_name": "Hemlock Woolly Adelgid",
+      "scientific_name": "Adelges tsugae",
+      "aliases": ["HWA", "woolly adelgid"],
+      "category": "insect",
+      "why_it_matters": "This tiny insect feeds at the base of hemlock needles and can kill a mature tree within a decade. Hemlocks shade mountain streams and keep them cool, so losing them changes water temperature and harms trout and other cold-water species.",
+      "what_to_do": [
+        "Look for small white woolly masses at the base of needles on the undersides of twigs, most visible in winter and spring",
+        "Report infestations to your state forestry agency",
+        "Consult an arborist about treatment for high-value or streamside hemlocks - effective options exist if applied early",
+        "Do not move hemlock nursery stock or branches out of infested areas",
+        "Clean bird feeders near hemlocks, as birds can carry the crawlers between trees"
+      ]
+    },
+    {
+      "common_name": "Spongy Moth",
+      "scientific_name": "Lymantria dispar",
+      "aliases": ["gypsy moth", "European spongy moth", "LDD moth"],
+      "category": "insect",
+      "why_it_matters": "Spongy moth caterpillars defoliate oaks and other hardwoods across huge areas during outbreak years. Repeated defoliation weakens and eventually kills trees, and the caterpillar hairs can cause skin irritation in sensitive people.",
+      "what_to_do": [
+        "Scrape egg masses (tan, felt-like patches) into soapy water between autumn and early spring",
+        "Check vehicles, trailers, firewood and outdoor furniture before moving them out of infested regions",
+        "Wrap trunks with burlap bands to trap caterpillars that climb down during the day",
+        "Report outbreaks in previously unaffected areas to your state forestry agency",
+        "Water and mulch defoliated trees to help them recover and refoliate"
+      ]
+    },
+    {
+      "common_name": "Red Imported Fire Ant",
+      "scientific_name": "Solenopsis invicta",
+      "aliases": ["RIFA", "fire ant"],
+      "category": "insect",
+      "why_it_matters": "Fire ants swarm and sting aggressively when their mounds are disturbed, causing painful welts and occasionally severe allergic reactions. They also displace native ant species, harm ground-nesting wildlife, and damage electrical equipment they nest inside.",
+      "what_to_do": [
+        "Do not disturb or kick mounds - they respond by swarming",
+        "Treat mounds with approved baits, which workers carry back to the queen, rather than pouring remedies on top",
+        "Wear closed shoes and check the ground before sitting or working in grass in infested regions",
+        "Seek medical help immediately for multiple stings or any sign of an allergic reaction",
+        "Report sightings well outside the known southern range, where quarantine rules apply"
+      ]
+    },
+    {
+      "common_name": "Africanized Honey Bee",
+      "scientific_name": "Apis mellifera scutellata",
+      "aliases": ["killer bee", "Africanized bee", "AHB"],
+      "category": "insect",
+      "why_it_matters": "Africanized honey bees defend their colonies far more aggressively than European honey bees, pursuing perceived threats over long distances and stinging in much greater numbers. They also displace managed and wild honey bee colonies.",
+      "what_to_do": [
+        "Do not approach, disturb or attempt to remove any wild colony yourself",
+        "If bees pursue you, run in a straight line to enclosed shelter and do not stand still or jump into water",
+        "Protect your face and eyes while retreating",
+        "Call a licensed pest professional or local beekeeping association for removal",
+        "Seek emergency care for multiple stings or any allergic reaction",
+        "Seal wall cavities, utility boxes and other potential nest sites around your property"
+      ]
+    },
+    {
+      "common_name": "Asian Citrus Psyllid",
+      "scientific_name": "Diaphorina citri",
+      "aliases": ["ACP", "citrus psyllid"],
+      "category": "insect",
+      "why_it_matters": "This small insect transmits the bacterium that causes citrus greening disease, which makes fruit bitter and misshapen and eventually kills the tree. There is no cure once a tree is infected, and the disease has devastated commercial citrus in Florida.",
+      "what_to_do": [
+        "Do not move citrus plants, cuttings or fruit out of quarantine areas",
+        "Report suspected sightings to your state agriculture department",
+        "Inspect new citrus growth for the insect feeding at a distinctive angle to the leaf",
+        "Buy citrus trees only from registered, certified nurseries",
+        "Remove and dispose of trees confirmed as infected, following official guidance"
+      ]
+    },
+    {
+      "common_name": "Japanese Beetle",
+      "scientific_name": "Popillia japonica",
+      "aliases": ["Japanese chafer"],
+      "category": "insect",
+      "why_it_matters": "Adults skeletonise the leaves of hundreds of plant species, from roses to fruit trees, while the grubs feed on grass roots and damage lawns and pasture from below. It is now widespread across the eastern United States and continues to expand west.",
+      "what_to_do": [
+        "Hand-pick adults in the early morning and drop them into soapy water, when they are sluggish",
+        "Avoid pheromone traps near plants you care about - they attract more beetles than they capture",
+        "Treat lawn grubs in late summer when they are small and near the surface",
+        "Report sightings in western states, where eradication programmes are still active",
+        "Choose less-preferred plants when replanting in heavily infested areas"
+      ]
+    },
+
+    {
+      "common_name": "Burmese Python",
+      "scientific_name": "Python bivittatus",
+      "aliases": ["Python molurus bivittatus", "Burmese rock python"],
+      "category": "animal",
+      "why_it_matters": "Released and escaped pet Burmese pythons have established a breeding population in the Florida Everglades, where they have caused dramatic declines in raccoons, opossums, rabbits and other mammals. They have no natural predators there and can exceed five metres in length.",
+      "what_to_do": [
+        "Do not attempt to capture or handle a large python yourself",
+        "Report sightings in Florida to the FWC Exotic Species Hotline or the reporting app",
+        "Photograph it from a safe distance to help confirm identification",
+        "Never release an unwanted exotic pet - use an amnesty or surrender programme instead",
+        "Keep small pets leashed and supervised near canals and levees in south Florida"
+      ]
+    },
+    {
+      "common_name": "Feral Hog",
+      "scientific_name": "Sus scrofa",
+      "aliases": ["wild boar", "feral pig", "wild hog", "razorback"],
+      "category": "animal",
+      "why_it_matters": "Feral hogs root through soil in a way that destroys native ground vegetation, erodes stream banks and wrecks croplands, causing billions of dollars in damage annually. They also carry diseases transmissible to livestock and people, and reproduce fast enough to outpace most control efforts.",
+      "what_to_do": [
+        "Keep your distance - hogs can be aggressive, especially sows with young",
+        "Report sightings to your state wildlife agency, particularly in states without established populations",
+        "Never relocate or release hogs; deliberate transport is a major driver of range expansion and is illegal in many states",
+        "Wear gloves when handling carcasses, as they carry diseases including brucellosis",
+        "Fence gardens and sensitive ground, and secure feed and rubbish that might attract them"
+      ]
+    },
+    {
+      "common_name": "European Starling",
+      "scientific_name": "Sturnus vulgaris",
+      "aliases": ["common starling"],
+      "category": "animal",
+      "why_it_matters": "Starlings aggressively evict native cavity-nesting birds such as bluebirds, woodpeckers and purple martins from nest holes. Their enormous winter flocks damage crops, foul structures, and pose a genuine hazard to aircraft.",
+      "what_to_do": [
+        "Use nest boxes with entrance holes small enough to exclude starlings, around 3.8 cm for bluebirds",
+        "Block gaps in eaves, vents and signage where they nest on buildings",
+        "Avoid ground-scattered grain feeding, which draws large flocks",
+        "Use feeders that exclude larger birds if starlings dominate your yard",
+        "Note that as a non-native species, starlings are not protected by the Migratory Bird Treaty Act"
+      ]
+    },
+    {
+      "common_name": "House Sparrow",
+      "scientific_name": "Passer domesticus",
+      "aliases": ["English sparrow"],
+      "category": "animal",
+      "why_it_matters": "House sparrows compete fiercely for nest cavities and will kill native adults and nestlings, particularly bluebirds and tree swallows, to take over a box. They are among the most widespread introduced birds in North America.",
+      "what_to_do": [
+        "Monitor nest boxes regularly and remove house sparrow nests before eggs hatch",
+        "Mount bluebird boxes away from buildings and farmyards, which sparrows favour",
+        "Avoid cheap mixed seed containing milo and cracked corn, which attracts them",
+        "Seal building gaps where they nest",
+        "Like starlings, they are not federally protected as a non-native species"
+      ]
+    },
+    {
+      "common_name": "Nutria",
+      "scientific_name": "Myocastor coypus",
+      "aliases": ["coypu", "river rat"],
+      "category": "animal",
+      "why_it_matters": "Nutria eat the roots of marsh plants rather than just the shoots, killing the vegetation that holds wetlands together and converting marsh into open water. They have contributed to serious coastal wetland loss along the Gulf Coast and in the Chesapeake region.",
+      "what_to_do": [
+        "Report sightings to your state wildlife agency, especially in areas where eradication programmes are running",
+        "Do not feed them or leave pet food accessible near water",
+        "Photograph the animal - note the white muzzle and round tail, which distinguish it from beaver and muskrat",
+        "Protect garden and levee areas with fencing where they are established",
+        "Avoid handling live or dead animals, which can carry parasites and disease"
+      ]
+    },
+    {
+      "common_name": "Brown Tree Snake",
+      "scientific_name": "Boiga irregularis",
+      "aliases": ["BTS"],
+      "category": "animal",
+      "why_it_matters": "Accidentally introduced to Guam after the Second World War, the brown tree snake drove most of the island's native forest birds to extinction and causes frequent power outages by climbing electrical infrastructure. Preventing its arrival in Hawaii and elsewhere is a major biosecurity priority.",
+      "what_to_do": [
+        "Report any sighting outside Guam immediately to wildlife authorities - this is treated as an emergency",
+        "Do not handle it; it is mildly venomous and bites readily",
+        "Inspect cargo, vehicles and aircraft arriving from Guam, a key interception point",
+        "Photograph it from a safe distance if you can",
+        "Support and comply with airport and port biosecurity inspections"
+      ]
+    },
+
+    {
+      "common_name": "Zebra Mussel",
+      "scientific_name": "Dreissena polymorpha",
+      "aliases": ["zebra clam"],
+      "category": "aquatic",
+      "why_it_matters": "Zebra mussels filter out the plankton that native fish depend on and encrust every hard surface they find, clogging water intake pipes, boat engines and power plant infrastructure. A single female can produce a million eggs a year, and their sharp shells make beaches unpleasant to walk on.",
+      "what_to_do": [
+        "Clean, drain and dry your boat, trailer and all gear before moving between water bodies",
+        "Drain livewells, bilges and ballast completely on land before leaving the ramp",
+        "Let equipment dry for at least five days, or wash with hot water, before entering new waters",
+        "Never move water, bait or live fish from one lake to another",
+        "Report new sightings to your state natural resources agency"
+      ]
+    },
+    {
+      "common_name": "Quagga Mussel",
+      "scientific_name": "Dreissena rostriformis bugensis",
+      "aliases": ["Dreissena bugensis", "quagga"],
+      "category": "aquatic",
+      "why_it_matters": "Closely related to the zebra mussel but able to colonise deeper, colder and softer lake bottoms, the quagga mussel is even harder to contain. It has restructured food webs in the Great Lakes and heavily fouls water infrastructure in the Colorado River system.",
+      "what_to_do": [
+        "Clean, drain and dry all watercraft and equipment between water bodies",
+        "Comply with mandatory inspection and decontamination stations, especially in western states",
+        "Never transport water, bait or aquarium contents between lakes",
+        "Allow gear to dry thoroughly - larvae are microscopic and invisible in residual water",
+        "Report suspected new populations to your state wildlife agency"
+      ]
+    },
+    {
+      "common_name": "Silver Carp",
+      "scientific_name": "Hypophthalmichthys molitrix",
+      "aliases": ["Asian carp", "flying carp", "jumping carp", "bighead carp", "Hypophthalmichthys nobilis"],
+      "category": "aquatic",
+      "why_it_matters": "Silver carp consume vast quantities of plankton, starving native fish at the base of the food web, and now dominate stretches of the Mississippi and Illinois river systems. They also leap violently from the water when startled by boat motors, injuring boaters.",
+      "what_to_do": [
+        "Never release live carp, or use them as live bait, in any water body",
+        "Report sightings in new watersheds, particularly anywhere near the Great Lakes basin",
+        "Drain all water from boats and livewells before leaving a launch",
+        "Slow down in known infested reaches, where startled fish jump into boats",
+        "Support and comply with barrier and monitoring programmes on connected waterways"
+      ]
+    },
+    {
+      "common_name": "Northern Snakehead",
+      "scientific_name": "Channa argus",
+      "aliases": ["snakehead", "frankenfish"],
+      "category": "aquatic",
+      "why_it_matters": "Northern snakeheads are aggressive predators that can breathe air and survive out of water for a considerable time, letting them move short distances over land between water bodies. They prey heavily on native fish and have no natural controls in North American waters.",
+      "what_to_do": [
+        "Do not release it back into the water if caught - in many states returning one alive is illegal",
+        "Kill it, photograph it, and report the catch to your state wildlife agency with the location",
+        "Do not transport it live under any circumstances",
+        "Never release aquarium or live-market fish into local waters",
+        "Learn to distinguish it from native bowfin before reporting, as the two are often confused"
+      ]
+    },
+    {
+      "common_name": "Lionfish",
+      "scientific_name": "Pterois volitans",
+      "aliases": ["Pterois miles", "red lionfish", "devil firefish"],
+      "category": "aquatic",
+      "why_it_matters": "Lionfish are voracious predators of juvenile reef fish in the Atlantic, Caribbean and Gulf of Mexico, where native species do not recognise them as a threat. They reproduce year-round, have venomous spines, and have spread rapidly since their aquarium-trade introduction.",
+      "what_to_do": [
+        "Do not touch it - the dorsal, pelvic and anal spines deliver a painful venomous sting",
+        "For a sting, immerse the area in hot water and seek medical attention",
+        "Participate in organised lionfish derbies and removal dives where they run",
+        "They are excellent eating once the spines are removed safely - targeted harvest genuinely helps",
+        "Report sightings to REEF or your regional marine invasive species programme"
+      ]
+    },
+    {
+      "common_name": "Hydrilla",
+      "scientific_name": "Hydrilla verticillata",
+      "aliases": ["water thyme", "Florida elodea"],
+      "category": "aquatic",
+      "why_it_matters": "Hydrilla forms dense underwater mats that block sunlight, crowd out native aquatic plants and make boating, swimming and fishing nearly impossible. It regrows from tiny stem fragments and from tubers that stay viable in sediment for years.",
+      "what_to_do": [
+        "Remove all plant fragments from boats, trailers, motors and trailer bunks before leaving a launch",
+        "Never dump aquarium plants or water into any waterway or storm drain",
+        "Report new infestations to your state aquatic invasive species programme",
+        "Do not attempt to clear it by chopping, as fragments start new colonies",
+        "Clean, drain and dry everything that touched the water"
+      ]
+    },
+    {
+      "common_name": "Water Hyacinth",
+      "scientific_name": "Pontederia crassipes",
+      "aliases": ["Eichhornia crassipes", "common water hyacinth"],
+      "category": "aquatic",
+      "why_it_matters": "Water hyacinth can double its population in as little as two weeks, forming floating mats that block navigation, starve the water below of oxygen and light, and kill fish. It is considered one of the most damaging aquatic weeds worldwide.",
+      "what_to_do": [
+        "Never plant it in ponds or water gardens; its sale is banned in many states",
+        "Do not dispose of unwanted pond plants in waterways, ditches or storm drains - compost them well away from water",
+        "Remove small floating patches by hand and dispose of them on dry land",
+        "Report large mats to your state aquatic weed programme",
+        "Check boats and trailers for attached plant material before leaving the water"
+      ]
+    }
+  ]
+}

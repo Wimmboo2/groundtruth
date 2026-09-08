@@ -1,0 +1,109 @@
+/* Groundtruth — styles Tailwind utilities don't cover.
+   Design tokens live in the tailwind.config block in each HTML file. */
+
+/* ---------- Fonts ---------- */
+/* Caprasimo carries every verdict. Figtree carries every explanation. */
+
+/* ---------- Icons ----------
+   Lucide via CSS mask, so a single element inherits currentColor and needs
+   no icon library. Add a glyph by adding one .i-* rule. */
+.ico {
+  display: inline-block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: currentColor;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center;  mask-position: center;
+  -webkit-mask-size: contain;     mask-size: contain;
+}
+.i-camera      { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/camera.svg);         mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/camera.svg) }
+.i-image       { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/image.svg);          mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/image.svg) }
+.i-map-pin     { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/map-pin.svg);        mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/map-pin.svg) }
+.i-map         { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/map.svg);            mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/map.svg) }
+.i-alert       { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/triangle-alert.svg); mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/triangle-alert.svg) }
+.i-eye         { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/eye.svg);            mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/eye.svg) }
+.i-check       { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/check.svg);          mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/check.svg) }
+.i-help        { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/circle-help.svg);    mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/circle-help.svg) }
+.i-crosshair   { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/locate-fixed.svg);   mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/locate-fixed.svg) }
+.i-locate-off  { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/locate-off.svg);     mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/locate-off.svg) }
+.i-info        { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/info.svg);           mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/info.svg) }
+.i-shield      { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/shield-check.svg);   mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/shield-check.svg) }
+.i-chev-d      { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/chevron-down.svg);   mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/chevron-down.svg) }
+.i-x           { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/x.svg);              mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/x.svg) }
+.i-retry       { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/rotate-cw.svg);      mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/rotate-cw.svg) }
+.i-clock       { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/clock.svg);          mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/clock.svg) }
+.i-wifi-off    { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/wifi-off.svg);       mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/wifi-off.svg) }
+.i-arrow-r     { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/arrow-right.svg);    mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/arrow-right.svg) }
+.i-search-x    { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/search-x.svg);       mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/search-x.svg) }
+.i-sprout      { -webkit-mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/sprout.svg);         mask-image: url(https://unpkg.com/lucide-static@0.544.0/icons/sprout.svg) }
+
+/* ---------- Focus ----------
+   A 2px clay ring at 2px offset, never the browser default. */
+:focus-visible {
+  outline: 2px solid #c67139;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Wait state ---------- */
+@keyframes gt-sweep { 0% { transform: translateX(-100%) } 100% { transform: translateX(320%) } }
+.gt-sweep::after {
+  content: "";
+  position: absolute; inset: 0;
+  width: 32%;
+  background: linear-gradient(90deg, transparent, #c67139, transparent);
+  animation: gt-sweep 1.5s ease-in-out infinite;
+}
+@keyframes gt-fade-up { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+.gt-enter { animation: gt-fade-up .32s ease-out both }
+
+/* The sweep is the only thing looping, and it stops under reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  .gt-sweep::after { animation: none; width: 100%; opacity: .35 }
+  .gt-enter { animation: none }
+  * { transition-duration: .01ms !important }
+}
+
+/* ---------- Leaflet ----------
+   Warm the OSM tiles so the map sits in the palette instead of fighting it. */
+.gt-map .leaflet-tile-pane { filter: sepia(.32) saturate(.86) brightness(1.04) contrast(.94) }
+.gt-map { background: #e2d5bc }
+.leaflet-container { font-family: 'Figtree', system-ui, sans-serif }
+.leaflet-control-attribution { background: rgba(245,234,216,.86) !important; color: #645c50 !important; font-size: 10px !important }
+.leaflet-control-attribution a { color: #8c491a !important }
+.leaflet-bar a { background: #f5ead8 !important; color: #201e1d !important; border-bottom-color: #dcd3c4 !important }
+.leaflet-bar a:hover { background: #ebddc5 !important }
+
+/* Teardrop pin — the same silhouette the status legend uses. */
+.gt-pin {
+  width: 28px; height: 28px;
+  border-radius: 50% 50% 50% 2px;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 5px rgba(46,43,37,.3);
+  border: 2px solid rgba(255,255,255,.92);
+}
+.gt-pin .ico { width: 13px; height: 13px; color: #fff; transform: rotate(45deg) }
+.gt-pin-wrap { background: none !important; border: 0 !important }
+
+/* Hatched ground for the failed-map state — obviously not geography. */
+.gt-hatch {
+  background-color: #e6dbc8;
+  background-image: repeating-linear-gradient(45deg,
+    rgba(100,92,80,.13) 0 2px, transparent 2px 11px);
+}
+
+/* Utility */
+.gt-hidden { display: none !important }
+.gt-scroll { overflow-y: auto; -webkit-overflow-scrolling: touch }
+.gt-scroll::-webkit-scrollbar { width: 8px }
+.gt-scroll::-webkit-scrollbar-thumb { background: #dcd3c4; border-radius: 999px }
+
+/* Keep Leaflet's own furniture clear of the mobile bottom nav (88px tall).
+   The legend lives in the floating panel at the top, so the only things that
+   can collide down here are the zoom control and the attribution line. */
+@media (max-width: 767px) {
+  .leaflet-bottom.leaflet-right .leaflet-control-zoom { margin-bottom: 100px !important }
+  .leaflet-control-attribution { margin-bottom: 90px !important }
+}

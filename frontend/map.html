@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Groundtruth — community map</title>
+<meta name="description" content="Every invasive, introduced and native sighting logged by the Groundtruth community.">
+<meta name="theme-color" content="#f5ead8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: {
+    paper:'#f5ead8', surface:'#ebddc5', ink:'#201e1d',
+    clay:{DEFAULT:'#c67139',100:'#fff2eb',200:'#ffe1d0',600:'#b2622d',700:'#8c491a'},
+    sage:{DEFAULT:'#7a8a5e',100:'#f0fae1',700:'#56633f'},
+    mute:{300:'#dcd3c4',500:'#a19786',600:'#82796a',700:'#645c50',800:'#474238'},
+    invasive:  {DEFAULT:'#a32a1e', ink:'#7c1f16', tint:'#f6ded8', line:'#e8bcb2'},
+    introduced:{DEFAULT:'#b0770b', ink:'#8a5a00', tint:'#fbebc8', line:'#edd69b'},
+    native:    {DEFAULT:'#5b7c3a', ink:'#445c2a', tint:'#e5efd4', line:'#c4d8a8'},
+    unknown:   {DEFAULT:'#6b6b74', ink:'#4f4f57', tint:'#e9e5df', line:'#cfc9c1'}
+  },
+  fontFamily:{ display:['Caprasimo','serif'], sans:['Figtree','system-ui','sans-serif'] },
+  borderRadius:{ 'gt-sm':'8px', gt:'16px', 'gt-lg':'28px' },
+  spacing:{ 'gt-1':'4px','gt-2':'9px','gt-3':'13px','gt-4':'18px','gt-6':'26px','gt-8':'35px' },
+  boxShadow:{
+    'gt-sm':'0 1px 2px rgba(46,43,37,.14)',
+    'gt-md':'0 3px 10px rgba(46,43,37,.16)',
+    'gt-lg':'0 12px 32px rgba(46,43,37,.22)'
+  }
+}}};
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="min-h-full h-full bg-paper text-ink font-sans antialiased overflow-hidden">
+
+<div class="relative h-full w-full">
+
+  <!-- The map itself. Full bleed on both sizes. -->
+  <div id="map" class="gt-map absolute inset-0 z-0"></div>
+
+  <!-- Failed to load: no tiles, no legend, no recentre, and a hatched ground
+       that is obviously not geography. At a glance this and the empty map are
+       unmistakably different things. -->
+  <div id="mapFailed" class="gt-hidden absolute inset-0 z-[500] gt-hatch flex items-center justify-center px-5">
+    <div class="max-w-[420px] w-full bg-paper rounded-gt-lg shadow-gt-lg p-6 text-center">
+      <span class="inline-flex w-[60px] h-[60px] rounded-full bg-surface items-center justify-center">
+        <span class="ico i-wifi-off w-7 h-7 text-mute-700" aria-hidden="true"></span>
+      </span>
+      <h1 class="font-display text-[26px] leading-[1.14] mt-4">The map did not load</h1>
+      <p class="text-[14px] leading-[1.55] text-mute-800 mt-2.5">
+        This is a display problem, not an empty map. We could not reach the tile server, so there is nothing to draw sightings on.
+      </p>
+      <p class="text-[13px] leading-[1.5] text-mute-700 mt-3 bg-surface rounded-gt px-3.5 py-2.5">
+        Every sighting already logged is safe. Nothing has been lost.
+      </p>
+      <button type="button" id="mapRetry" class="mt-5 w-full h-[52px] rounded-full bg-clay text-paper font-display text-[16px] shadow-gt-md">
+        Try loading the map again
+      </button>
+      <a href="index.html" class="mt-3 w-full h-[48px] rounded-full font-display text-[15px] text-mute-700 flex items-center justify-center">
+        Identify something instead
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating header + legend. The legend doubles as the filter, so the
+       colour key is never a separate thing to find. -->
+  <div id="mapChrome" class="absolute top-0 inset-x-0 z-[600] pointer-events-none">
+    <div class="mx-auto w-full max-w-[430px] md:max-w-none md:mx-0 px-4 pt-4 md:px-6 md:pt-6">
+      <div class="pointer-events-auto bg-paper/95 backdrop-blur rounded-gt-lg shadow-gt-md p-4 md:max-w-[360px]">
+
+        <div class="flex items-center justify-between gap-3">
+          <div class="min-w-0">
+            <a href="index.html" class="hidden md:block font-display text-[20px] mb-1">Groundtruth</a>
+            <h1 class="font-display text-[19px] md:text-[22px] leading-tight">Sightings near you</h1>
+            <p class="hidden md:block text-[12.5px] text-mute-700 mt-1 leading-[1.45]">
+              Every sighting anyone has logged. Tap a pin for the species, the status and the date.
+            </p>
+          </div>
+          <span id="mapCount" class="flex-none text-[12px] font-bold text-mute-700 bg-surface rounded-full px-3 py-1.5">—</span>
+        </div>
+
+        <div class="mt-3 pt-3 border-t border-ink/10">
+          <div class="text-[11.5px] font-bold uppercase tracking-[.08em] text-mute-700 mb-2">Filter</div>
+          <div class="flex flex-wrap gap-2" id="legend"><!-- built by map.js --></div>
+        </div>
+
+        <div class="hidden md:block mt-3 pt-3 border-t border-ink/10">
+          <div class="text-[11.5px] font-bold uppercase tracking-[.08em] text-mute-700 mb-2">Most recent</div>
+          <ul id="recentList" class="space-y-2"></ul>
+        </div>
+
+        <button type="button" id="recentre" class="hidden md:flex mt-3 w-full h-[42px] rounded-full border border-ink/20 font-display text-[14px] items-center justify-center gap-2">
+          <span class="ico i-crosshair w-4 h-4" aria-hidden="true"></span>Recentre on me
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty: the map is fully drawn and visibly working. That is the whole
+       difference between empty and broken. -->
+  <div id="mapEmpty" class="gt-hidden absolute inset-x-0 bottom-[104px] md:bottom-8 z-[600] px-4 md:px-0 md:left-auto md:right-6 md:w-[360px]">
+    <div class="bg-paper rounded-gt-lg shadow-gt-lg p-5 mx-auto max-w-[430px]">
+      <h2 class="font-display text-[20px]">The map is empty here</h2>
+      <p class="text-[13.5px] leading-[1.5] text-mute-800 mt-2">
+        Nobody has logged a sighting in this area yet. The first pin can be yours.
+      </p>
+      <a href="index.html" class="mt-4 w-full h-[50px] rounded-full bg-clay text-paper font-display text-[16px] flex items-center justify-center gap-2.5 shadow-gt-md">
+        <span class="ico i-camera w-5 h-5" aria-hidden="true"></span>Identify something
+      </a>
+      <button type="button" id="zoomOut" class="mt-2.5 w-full h-[44px] rounded-full font-display text-[14px] text-mute-700">
+        Zoom out to see the whole country
+      </button>
+    </div>
+  </div>
+
+  <!-- Pin tapped. A bottom sheet on mobile; on desktop it sits in the panel
+       column rather than covering the pin you just clicked. -->
+  <div id="sheet" class="gt-hidden absolute inset-x-0 bottom-[88px] md:bottom-6 md:left-auto md:right-6 md:w-[360px] z-[700] px-4 md:px-0">
+    <div class="bg-paper rounded-gt-lg shadow-gt-lg p-5 mx-auto max-w-[430px] gt-enter">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span id="sheetPin" class="gt-pin flex-none"><span class="ico" aria-hidden="true"></span></span>
+          <span id="sheetStatus" class="font-display text-[17px]"></span>
+        </div>
+        <button type="button" id="sheetClose" aria-label="Close" class="flex-none w-8 h-8 rounded-full bg-surface flex items-center justify-center">
+          <span class="ico i-x w-4 h-4 text-mute-700" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="mt-3">
+        <div class="font-display text-[21px] leading-tight" id="sheetName"></div>
+        <div class="text-[13px] text-mute-700 italic mt-0.5" id="sheetSci"></div>
+      </div>
+      <dl class="mt-3 pt-3 border-t border-ink/10 space-y-1.5 text-[12.5px] text-mute-700">
+        <div class="flex gap-2"><dt class="font-semibold">Logged</dt><dd id="sheetDate"></dd></div>
+        <div class="flex gap-2"><dt class="font-semibold">Point</dt><dd id="sheetCoords" class="tabular-nums"></dd></div>
+      </dl>
+      <!-- Only the four columns the sightings table actually holds. -->
+      <p class="mt-3 text-[12px] leading-[1.5] text-mute-700">
+        A sighting records the name, the status, the point and the time. Nothing about who logged it.
+      </p>
+      <a href="index.html" class="mt-4 w-full h-[48px] rounded-full border border-ink/25 font-display text-[15px] flex items-center justify-center gap-2.5">
+        <span class="ico i-camera w-[18px] h-[18px]" aria-hidden="true"></span>Identify one yourself
+      </a>
+    </div>
+  </div>
+
+  <!-- Rate limited: the map page hits GET /api/sightings, which counts too. -->
+  <div id="mapLimited" class="gt-hidden absolute inset-0 z-[800] bg-paper flex items-center justify-center px-5">
+    <div class="max-w-[420px] w-full text-center">
+      <div class="font-display text-[82px] leading-none tabular-nums" id="mapRlNum">60<span class="text-[34px]">s</span></div>
+      <div class="text-[13px] text-mute-700 mt-1">until you can try again</div>
+      <h1 class="font-display text-[24px] leading-[1.14] mt-6">That is enough requests for now</h1>
+      <p class="text-[14px] leading-[1.55] text-mute-800 mt-2.5">
+        Groundtruth limits how often it can be called, which is what keeps the services it uses inside their free tiers.
+      </p>
+      <p class="mt-4 text-[12.5px] leading-[1.55] text-mute-700 bg-surface rounded-gt px-3.5 py-3">
+        The limit counts by network, not by person. On shared wifi everyone around you counts as one.
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom nav (mobile) -->
+  <nav class="md:hidden absolute bottom-0 inset-x-0 h-[88px] bg-paper border-t border-ink/10 grid grid-cols-2 px-8 pt-2.5 gap-2.5 z-[900]" aria-label="Main">
+    <a href="index.html" class="flex flex-col items-center gap-1.5 pt-0.5">
+      <span class="w-[58px] h-[30px] flex items-center justify-center">
+        <span class="ico i-camera w-5 h-5 text-mute-700" aria-hidden="true"></span>
+      </span>
+      <span class="text-[11.5px] font-semibold text-mute-700">Identify</span>
+    </a>
+    <a href="map.html" aria-current="page" class="flex flex-col items-center gap-1.5 pt-0.5">
+      <span class="w-[58px] h-[30px] rounded-full bg-clay-200 flex items-center justify-center">
+        <span class="ico i-map-pin w-5 h-5 text-clay-700" aria-hidden="true"></span>
+      </span>
+      <span class="text-[11.5px] font-bold text-clay-700">Map</span>
+    </a>
+  </nav>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/map.js"></script>
+</body>
+</html>
