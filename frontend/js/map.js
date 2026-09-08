@@ -47,7 +47,7 @@
       center: CFG.MAP_DEFAULT_CENTER,
       zoom: CFG.MAP_DEFAULT_ZOOM
     });
-    map.zoomControl.setPosition("bottomright");
+    map.zoomControl.setPosition("bottomleft");
 
     var tiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,

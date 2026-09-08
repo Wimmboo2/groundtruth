@@ -529,18 +529,38 @@
   }
 
   var countdownTimer = null;
+
+  // Retry-After is always seconds, but it carries three very different waits:
+  // the per-minute limit (under a minute), the per-day limit, and the global
+  // identify ceiling - the last two are measured in hours. Rendering 86400 as
+  // a five-digit second count under a headline about "one minute" reads as a
+  // bug, so both the unit and the wording follow the size of the wait.
+  function waitParts(s) {
+    if (s < 60) return { n: s, u: "s" };
+    if (s < 3600) return { n: Math.ceil(s / 60), u: "m" };
+    return { n: Math.ceil(s / 3600), u: "h" };
+  }
+
+  function numeralHTML(s) {
+    var p = waitParts(s);
+    return p.n + '<span class="text-[34px]">' + p.u + '</span>';
+  }
+
   function renderRateLimited(seconds) {
     clearInterval(countdownTimer);
     var remaining = Math.max(1, seconds || 60);
+    // Only a wait someone will actually sit through gets a live countdown.
+    var ticks = remaining <= 120;
 
     // The countdown numeral is the signature. Nothing else in the app looks
     // remotely like this, so a rate limit can never be read as a crash.
     views.fail.innerHTML = '' +
       '<div class="text-center pt-2">' +
-        '<div class="font-display text-[82px] leading-none tabular-nums" id="rlNum">' + remaining + '<span class="text-[34px]">s</span></div>' +
+        '<div class="font-display text-[82px] leading-none tabular-nums" id="rlNum">' + numeralHTML(remaining) + '</div>' +
         '<div class="text-[13px] text-mute-700 mt-1">until you can try again</div>' +
       '</div>' +
-      '<h1 class="font-display text-[26px] leading-[1.12] mt-7">That is enough checks for one minute</h1>' +
+      '<h1 class="font-display text-[26px] leading-[1.12] mt-7">' +
+        (ticks ? "That is enough checks for one minute" : "That is enough checks for today") + '</h1>' +
       '<p class="text-[14px] leading-[1.55] text-mute-800 mt-2.5">' +
         'Groundtruth allows five identifications a minute and twenty a day, which is what keeps the services it calls inside their free tiers.</p>' +
       '<p class="mt-4 text-[12.5px] leading-[1.55] text-mute-700 bg-surface rounded-gt px-3.5 py-3">' +
@@ -548,6 +568,10 @@
       '<a href="map.html" class="mt-6 w-full h-[54px] rounded-full border border-ink/25 font-display text-[16px] flex items-center justify-center gap-2.5">' +
         '<span class="ico i-map w-5 h-5" aria-hidden="true"></span>Browse the map meanwhile</a>';
     switchTo("fail");
+
+    // A day-long timer would tick 86,400 times to no purpose, and silently
+    // resuming an upload the user abandoned hours ago is not a kindness.
+    if (!ticks) return;
 
     countdownTimer = setInterval(function () {
       remaining -= 1;
@@ -560,7 +584,7 @@
         resumeUpload();
         return;
       }
-      num.innerHTML = remaining + '<span class="text-[34px]">s</span>';
+      num.innerHTML = numeralHTML(remaining);
     }, 1000);
   }
 
