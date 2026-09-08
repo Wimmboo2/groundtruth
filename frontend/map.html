@@ -108,8 +108,8 @@ tailwind.config = { theme: { extend: {
 
   <!-- Empty: the map is fully drawn and visibly working. That is the whole
        difference between empty and broken. -->
-  <div id="mapEmpty" class="gt-hidden absolute inset-x-0 bottom-[104px] md:bottom-8 z-[600] px-4 md:px-0 md:left-auto md:right-6 md:w-[360px]">
-    <div class="bg-paper rounded-gt-lg shadow-gt-lg p-5 mx-auto max-w-[430px]">
+  <div id="mapEmpty" class="pointer-events-none gt-hidden absolute inset-x-0 bottom-[104px] md:bottom-8 z-[600] px-4 md:px-0 md:left-auto md:right-6 md:w-[360px]">
+    <div class="bg-paper pointer-events-auto rounded-gt-lg shadow-gt-lg p-5 mx-auto max-w-[430px]">
       <h2 class="font-display text-[20px]">The map is empty here</h2>
       <p class="text-[13.5px] leading-[1.5] text-mute-800 mt-2">
         Nobody has logged a sighting in this area yet. The first pin can be yours.
@@ -125,8 +125,8 @@ tailwind.config = { theme: { extend: {
 
   <!-- Pin tapped. A bottom sheet on mobile; on desktop it sits in the panel
        column rather than covering the pin you just clicked. -->
-  <div id="sheet" class="gt-hidden absolute inset-x-0 bottom-[88px] md:bottom-6 md:left-auto md:right-6 md:w-[360px] z-[700] px-4 md:px-0">
-    <div class="bg-paper rounded-gt-lg shadow-gt-lg p-5 mx-auto max-w-[430px] gt-enter">
+  <div id="sheet" class="pointer-events-none gt-hidden absolute inset-x-0 bottom-[88px] md:bottom-6 md:left-auto md:right-6 md:w-[360px] z-[700] px-4 md:px-0">
+    <div class="bg-paper pointer-events-auto rounded-gt-lg shadow-gt-lg p-5 mx-auto max-w-[430px] gt-enter">
       <div class="flex items-start justify-between gap-3">
         <div class="flex items-center gap-2.5 min-w-0">
           <span id="sheetPin" class="gt-pin flex-none"><span class="ico" aria-hidden="true"></span></span>

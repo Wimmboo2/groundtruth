@@ -102,8 +102,10 @@
 
 /* Keep Leaflet's own furniture clear of the mobile bottom nav (88px tall).
    The legend lives in the floating panel at the top, so the only things that
-   can collide down here are the zoom control and the attribution line. */
+   can collide down here are the zoom control and the attribution line.
+   The zoom control sits bottom-LEFT because the empty-state card and the pin
+   sheet are anchored bottom-right on desktop, and overlapped it there. */
 @media (max-width: 767px) {
-  .leaflet-bottom.leaflet-right .leaflet-control-zoom { margin-bottom: 100px !important }
+  .leaflet-bottom.leaflet-left .leaflet-control-zoom { margin-bottom: 100px !important }
   .leaflet-control-attribution { margin-bottom: 90px !important }
 }
