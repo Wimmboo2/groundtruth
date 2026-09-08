@@ -192,9 +192,13 @@ New **Web Service** → connect this repo.
 
 | Setting | Value |
 |---|---|
-| Root Directory | `backend` |
-| Build Command | `pip install -r requirements.txt` |
-| Start Command | `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+| Root Directory | *(leave blank)* |
+| Build Command | `pip install -r backend/requirements.txt` |
+| Start Command | `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT` |
+
+Root Directory is left blank and the paths carry `backend/` instead. Either
+approach works; this one keeps the whole configuration in the two commands,
+so there is one less dashboard field that can silently drift.
 
 **Required env vars:** `GEMINI_API_KEY`, `PLANTNET_API_KEY`, `SUPABASE_URL`,
 `SUPABASE_KEY`, `ALLOWED_ORIGIN`

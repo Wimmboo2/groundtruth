@@ -6,7 +6,7 @@
  * Leave it as "" only if the API is served from this same origin.
  */
 window.GT_CONFIG = {
-  API_BASE: "https://YOUR-SERVICE.onrender.com",
+  API_BASE: "https://groundtruth-api-xwdw.onrender.com",
 
   // Client-side guards. Keep these in step with the backend, which enforces
   // the real limits — these exist so nobody waits out a 14 MB upload to be
