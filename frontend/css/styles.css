@@ -109,3 +109,43 @@
   .leaflet-bottom.leaflet-left .leaflet-control-zoom { margin-bottom: 100px !important }
   .leaflet-control-attribution { margin-bottom: 90px !important }
 }
+
+/* ── Touch feedback ──────────────────────────────────────────────────────
+   Every interactive element was hover-only, which does nothing on a phone.
+   A tap produced no acknowledgement at all until the next page painted, so
+   a slow navigation read as "the app is broken" rather than "the app is
+   busy". An instant opacity change costs nothing and removes that entirely.
+   touch-action also drops the legacy double-tap-to-zoom delay in browsers
+   that still apply it. */
+a, button, [role="button"], label[for], summary {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+@media (hover: none) {
+  a:active, button:active, label[for]:active, summary:active { opacity: .55 }
+}
+
+/* ── Short viewports ─────────────────────────────────────────────────────
+   Both floating panels on the map are fixed height, so the smaller the
+   screen the larger the share they take. Measured on the deployed page:
+   371px of open map at 412x915, but only 146px at 344x690 - 21% of the
+   screen, on the one page whose entire job is showing a map. Tighten the
+   chrome on short screens instead of letting fixed padding win.
+
+   Height-based, not width-based, because this is about vertical crowding:
+   a wide-but-short screen (a phone in landscape) has the same problem.
+   ID selectors beat Tailwind's single-class utilities on specificity, so
+   no !important is needed. Desktop is untouched. */
+@media (max-width: 767px) and (max-height: 800px) {
+  #mapChrome > div            { padding-top: 10px }
+  #mapChrome > div > div      { padding: 12px }
+  #mapChrome h1               { font-size: 16.5px }
+  #filterLabel                { display: none }
+  #filterBlock                { margin-top: 10px; padding-top: 10px }
+
+  #mapEmpty > div             { padding: 16px }
+  #mapEmpty h2                { font-size: 18px }
+  #mapEmpty p                 { font-size: 13px; margin-top: 6px }
+  #mapEmpty a                 { height: 46px; margin-top: 14px }
+  #mapEmpty #zoomOut          { height: 38px; margin-top: 6px }
+}
