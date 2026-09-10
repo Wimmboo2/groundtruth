@@ -737,9 +737,34 @@
     loadRail();
     setLocationUI(false);
 
-    el("shutter").addEventListener("click", function () { el("fileInput").click(); });
+    // Camera vs library.
+    //
+    // Delegated from the whole dashed zone rather than bound to the button,
+    // so the entire target stays tappable the way it was when it was a single
+    // <button>. #shutterCam is still a real button underneath, purely so it
+    // remains keyboard-reachable - its click bubbles up to here rather than
+    // opening a picker itself, which is what stops it firing twice.
+    //
+    // matchMedia is read at click time rather than cached, so rotating a
+    // tablet across the breakpoint cannot strand the wrong input.
+    el("shutter").addEventListener("click", function (e) {
+      if (e.target.closest("#shutterSub")) return;   // library handles its own
+      var desktop = window.matchMedia("(min-width: 768px)").matches;
+      el(desktop ? "fileInput" : "cameraInput").click();
+    });
+    el("shutterSub").addEventListener("click", function () { el("fileInput").click(); });
     el("photoChange").addEventListener("click", function () { el("fileInput").click(); });
-    el("fileInput").addEventListener("change", function (e) { acceptFile(e.target.files[0]); });
+
+    // Clearing the value matters here: a camera hands back the same filename
+    // every time, and without the reset a second shot of the same name fires
+    // no change event at all. The File object stays valid after the reset.
+    function onPicked(e) {
+      var file = e.target.files[0];
+      e.target.value = "";
+      acceptFile(file);
+    }
+    el("fileInput").addEventListener("change", onPicked);
+    el("cameraInput").addEventListener("change", onPicked);
     el("identifyBtn").addEventListener("click", runIdentify);
 
     el("locToggle").addEventListener("click", function () {
@@ -759,7 +784,6 @@
     if (window.matchMedia("(min-width: 768px)").matches) {
       el("shutterLabel").textContent = "Drop a photo here";
       el("shutterSub").textContent = "or click to choose one";
-      el("fileInput").removeAttribute("capture");
     }
     ["dragenter", "dragover"].forEach(function (evt) {
       el("shutter").addEventListener(evt, function (e) {
