@@ -87,17 +87,26 @@ tailwind.config = { theme: { extend: {
             </div>
           </div>
 
-          <!-- One target, one question. The library option is a link inside the
-               target rather than a second button competing with it. -->
-          <button type="button" id="shutter"
+          <!-- Two targets, because the copy has always promised two paths and
+               a single input could only ever honour one of them. The camera
+               button carries capture="environment", which opens the camera app
+               directly on a phone; the library button deliberately does not,
+               because capture on a shared input removes the ability to pick an
+               existing photo at all. Desktop ignores capture entirely, so both
+               buttons land on the same picker there and the labels swap.
+               The dashed zone stays the drop target and keeps its id. -->
+          <div id="shutter"
             class="w-full h-[226px] md:h-[260px] rounded-gt-lg border-2 border-dashed border-[#e0a878] bg-clay-100 flex flex-col items-center justify-center gap-[13px]">
-            <span class="w-[74px] h-[74px] rounded-full bg-clay flex items-center justify-center shadow-gt-md">
-              <span class="ico i-camera w-[33px] h-[33px] text-paper" aria-hidden="true"></span>
-            </span>
-            <span class="font-display text-[19px] text-ink" id="shutterLabel">Take a photo</span>
-            <span class="text-[13px] text-clay-700 font-bold" id="shutterSub">or choose one from your library</span>
-          </button>
+            <button type="button" id="shutterCam" class="flex flex-col items-center gap-[13px]">
+              <span class="w-[74px] h-[74px] rounded-full bg-clay flex items-center justify-center shadow-gt-md">
+                <span class="ico i-camera w-[33px] h-[33px] text-paper" aria-hidden="true"></span>
+              </span>
+              <span class="font-display text-[19px] text-ink" id="shutterLabel">Take a photo</span>
+            </button>
+            <button type="button" id="shutterSub" class="px-4 py-3 rounded-gt text-[13px] text-clay-700 font-bold">or choose one from your library</button>
+          </div>
           <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" class="sr-only">
+          <input type="file" id="cameraInput" accept="image/jpeg,image/png,image/webp" capture="environment" class="sr-only">
 
           <!-- Coordinates are shown, not hidden. People are about to publish a
                point on a public map, so they get to see it first. -->
